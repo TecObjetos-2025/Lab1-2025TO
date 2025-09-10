@@ -3,10 +3,10 @@
 #include "Suma.h"
 #include <vector>
 
-double AdministradorOperaciones::calcular(const std::string &entrada)
+double AdministradorOperaciones::calcular(const std::string &expresion)
 {
     ProcesadorOperacion procesador;
-    std::vector<int> numeros = procesador.procesar(entrada);
+    std::vector<int> numeros = procesador.procesar(expresion);
 
     Suma suma;
     int resultado = 0;
@@ -14,4 +14,6 @@ double AdministradorOperaciones::calcular(const std::string &entrada)
     {
         resultado = suma.sumar(resultado, numero);
     }
+
+    return static_cast<double>(resultado);
 }
