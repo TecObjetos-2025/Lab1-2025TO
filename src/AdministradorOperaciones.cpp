@@ -1,19 +1,29 @@
 #include "AdministradorOperaciones.h"
 #include "ProcesadorOperacion.h"
-#include "Suma.h"
+#include "OperacionFactory.h"
+#include "Operacion.h"
 #include <vector>
+#include <stdexcept>
 
 double AdministradorOperaciones::calcular(const std::string &expresion)
 {
     ProcesadorOperacion procesador;
-    std::vector<int> numeros = procesador.procesar(expresion);
+    auto tokens = procesador.procesar(expresion);
 
-    Suma suma;
-    int resultado = 0;
-    for (int numero : numeros)
+    if (tokens.size() != 3)
     {
-        resultado = suma.ejecutar(resultado, numero);
+        throw std::invalid_argument("Error: Formato de expresion no valida");
     }
 
-    return static_cast<double>(resultado);
+    double numero1 = std::stod(tokens[0]);
+    char operador = tokens[1];
+    double numero2 = std::stod(tokens[2]);
+
+    Operacion *operacion = OperacionFactory::crearOperacion(operador);
+
+    double resultado = operacion->ejecutar(numero1, numero2);
+
+    delete operacion;
+
+    return resultado;
 }
