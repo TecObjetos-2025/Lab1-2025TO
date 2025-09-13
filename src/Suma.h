@@ -1,10 +1,12 @@
 #ifndef SUMA_H
 #define SUMA_H
 
-class Suma
+#include "Operacion.h"
+
+class Suma : public Operacion
 {
 public:
-    int sumar(int a, int b);
+    double ejecutar(double numero1, double numero2) override;
 };
 
 #endif // SUMA_H

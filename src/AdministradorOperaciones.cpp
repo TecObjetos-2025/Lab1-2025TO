@@ -12,7 +12,7 @@ double AdministradorOperaciones::calcular(const std::string &expresion)
     int resultado = 0;
     for (int numero : numeros)
     {
-        resultado = suma.sumar(resultado, numero);
+        resultado = suma.ejecutar(resultado, numero);
     }
 
     return static_cast<double>(resultado);

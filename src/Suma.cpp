@@ -1,6 +1,6 @@
 #include "Suma.h"
 
-int Suma::sumar(int a, int b)
+double Suma::ejecutar(double numero1, double numero2)
 {
-    return a + b;
+    return numero1 + numero2;
 }
