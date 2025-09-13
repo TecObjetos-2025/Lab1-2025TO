@@ -1,6 +1,47 @@
 #include <gtest/gtest.h>
 #include "../src/AdministradorOperaciones.h"
 
+TEST(AdministradorOperacionesTest, SePuedeCalcularResta)
+{
+    AdministradorOperaciones administrador;
+    std::string entrada = "50-15";
+    double resultadoEsperado = 35.0;
+
+    double resultadoActual = administrador.calcular(entrada);
+
+    ASSERT_DOUBLE_EQ(resultadoActual, resultadoEsperado);
+}
+
+TEST(AdministradorOperacionesTest, SePuedeCalcularMultiplicacion)
+{
+    AdministradorOperaciones administrador;
+    std::string entrada = "10*5";
+    double resultadoEsperado = 50.0;
+
+    double resultadoActual = administrador.calcular(entrada);
+
+    ASSERT_DOUBLE_EQ(resultadoActual, resultadoEsperado);
+}
+
+TEST(AdministradorOperacionesTest, SePuedeCalcularDivision)
+{
+    AdministradorOperaciones administrador;
+    std::string entrada = "100/4";
+    double resultadoEsperado = 25.0;
+
+    double resultadoActual = administrador.calcular(entrada);
+
+    ASSERT_DOUBLE_EQ(resultadoActual, resultadoEsperado);
+}
+
+TEST(AdministradorOperacionesTest, ManejarDivisionPorCero)
+{
+    AdministradorOperaciones administrador;
+    std::string entrada = "10/0";
+
+    ASSERT_THROW(administrador.calcular(entrada), std::runtime_error);
+}
+
 TEST(AdministradorOperacionesTest, SePuedeCalcularSumaDeDosNumeros)
 {
     AdministradorOperaciones administrador;
