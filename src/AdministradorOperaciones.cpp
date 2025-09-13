@@ -15,15 +15,22 @@ double AdministradorOperaciones::calcular(const std::string &expresion)
         throw std::invalid_argument("Error: Formato de expresion no valida");
     }
 
-    double numero1 = std::stod(tokens[0]);
-    char operador = tokens[1];
-    double numero2 = std::stod(tokens[2]);
+    try
+    {
+        double numero1 = std::stod(tokens[0]);
+        char operador = tokens[1][0];
+        double numero2 = std::stod(tokens[2]);
 
-    Operacion *operacion = OperacionFactory::crearOperacion(operador);
+        Operacion *operacion = OperacionFactory::crearOperacion(operador);
 
-    double resultado = operacion->ejecutar(numero1, numero2);
+        double resultado = operacion->ejecutar(numero1, numero2);
 
-    delete operacion;
+        delete operacion; // Liberar memoria
 
-    return resultado;
+        return resultado;
+    }
+    catch (const std::invalid_argument &e)
+    {
+        throw std::invalid_argument("Error de conversion o formato: " + std::string(e.what()));
+    }
 }

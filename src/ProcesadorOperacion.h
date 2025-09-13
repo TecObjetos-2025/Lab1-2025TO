@@ -8,9 +8,9 @@ class ProcesadorOperacion
 {
 public:
     /*
-     * Tomar una cadena y devolver un vector de enteros
+     * Tomar una cadena y devolver un vector de strings
      */
-    std::vector<int> procesar(const std::string &entrada);
+    std::vector<std::string> procesar(const std::string &entrada);
 };
 
 #endif
