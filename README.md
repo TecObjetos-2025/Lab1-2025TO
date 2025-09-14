@@ -41,6 +41,22 @@ Lab1/
 - **Google Test**: Framework de pruebas unitarias
 - **Git**: Control de versiones
 
+## 📦 Dependencias
+
+### Dependencia Externa Requerida
+- **Google Test**: Framework de testing para C++
+  - **Versión**: Compatible con la última versión estable
+  - **Ubicación**: `googletest/` en el directorio raíz del proyecto
+  - **Instalación**: Se clona automáticamente durante la configuración del proyecto
+
+### Gestión de Dependencias
+El proyecto utiliza **CMake** para gestionar Google Test como una dependencia externa. El archivo `CMakeLists.txt` incluye:
+```cmake
+add_subdirectory(googletest)
+```
+
+Esto permite que CMake compile Google Test junto con el proyecto principal.
+
 ## 🏛️ Arquitectura
 
 El proyecto implementa una **arquitectura orientada a objetos** con los siguientes patrones de diseño:
@@ -92,21 +108,45 @@ graph TD
    cd Lab1
    ```
 
-2. **Crear directorio de construcción**:
+2. **Clonar Google Test como submódulo** (REQUERIDO):
+   ```bash
+   # Si el repositorio ya incluye googletest, omite este paso
+   # Si no, clona Google Test en el directorio raíz del proyecto
+   git clone https://github.com/google/googletest.git googletest
+   ```
+   
+   **Alternativa con submódulos Git** (recomendado):
+   ```bash
+   # Si el proyecto usa submódulos Git
+   git submodule update --init --recursive
+   ```
+
+3. **Crear directorio de construcción**:
    ```bash
    mkdir build
    cd build
    ```
 
-3. **Configurar el proyecto con CMake**:
+4. **Configurar el proyecto con CMake**:
    ```bash
    cmake ..
    ```
 
-4. **Compilar el proyecto**:
+5. **Compilar el proyecto**:
    ```bash
    make
    ```
+
+### ⚠️ Nota Importante sobre Google Test
+
+**El proyecto requiere Google Test para compilar correctamente.** Si encuentras errores de compilación relacionados con archivos de Google Test, asegúrate de que:
+
+- El directorio `googletest/` existe en la raíz del proyecto
+- Contiene la estructura completa de Google Test (directorios `googletest/` y `googlemock/`)
+- Si usas Git, considera agregar Google Test como submódulo:
+  ```bash
+  git submodule add https://github.com/google/googletest.git googletest
+  ```
 
 ### Ejecución de la Aplicación
 
@@ -159,12 +199,39 @@ El proyecto incluye un conjunto completo de pruebas unitarias utilizando Google 
 3. Registrar en `OperacionFactory`
 4. Agregar pruebas unitarias correspondientes
 
+## 🔧 Troubleshooting
+
+### Problemas Comunes
+
+#### Error: "No such file or directory: googletest/CMakeLists.txt"
+**Solución**: Google Test no está presente en el proyecto
+```bash
+git clone https://github.com/google/googletest.git googletest
+```
+
+#### Error: "CMake Error: The source directory does not contain CMakeLists.txt"
+**Solución**: Verificar que estás en el directorio correcto del proyecto
+```bash
+pwd  # Debe mostrar: .../Lab1
+ls   # Debe mostrar: CMakeLists.txt, src/, test/, etc.
+```
+
+#### Error de compilación con Google Test
+**Solución**: Limpiar y recompilar
+```bash
+cd build
+make clean
+cmake ..
+make
+```
+
 ## 📝 Notas Adicionales
 
 - El proyecto utiliza **C++17** para aprovechar características modernas del lenguaje
 - Se implementa **RAII** para gestión automática de memoria
 - Las pruebas cubren casos básicos y casos límite
 - La arquitectura es extensible para futuras funcionalidades
+- **Google Test se incluye como dependencia externa** - asegúrate de clonarlo antes de compilar
 
 ## 👥 Contribución
 
