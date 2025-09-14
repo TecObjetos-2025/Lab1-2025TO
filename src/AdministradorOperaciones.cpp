@@ -42,7 +42,7 @@ double AdministradorOperaciones::calcular(const std::string &expresion)
             operadores.push(op_actual);
         }
     }
-    while (!operadores.empty())
+    while (!operadores.empty()) // Vaciar la pila
     {
         tokens_posfijos.push_back(std::string(1, operadores.top()));
         operadores.pop();

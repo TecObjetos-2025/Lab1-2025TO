@@ -63,3 +63,14 @@ TEST(AdministradorOperacionesTest, SePuedeCalcularSumaDeMuchosNumeros)
 
     ASSERT_DOUBLE_EQ(resultadoActual, resultadoEsperado);
 }
+
+TEST(AdministradorOperacionesTest, SePuedeEvaluarConPrecedencia)
+{
+    AdministradorOperaciones administrador;
+    std::string entrada = "3+4*2";
+    double resultadoEsperado = 11.0;
+
+    double resultadoActual = administrador.calcular(entrada);
+
+    ASSERT_DOUBLE_EQ(resultadoActual, resultadoEsperado);
+}
