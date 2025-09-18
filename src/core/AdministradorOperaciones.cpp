@@ -7,15 +7,6 @@
 #include <stdexcept>
 #include <stack>
 
-int precedencia(char op)
-{
-    if (op == '+' || op == '-')
-        return 1;
-    if (op == '*' || op == '/')
-        return 2;
-    return 0;
-}
-
 double AdministradorOperaciones::calcular(const std::string &expresion)
 {
     // Convertir de infijo a postfijo

@@ -3,6 +3,7 @@
 #include <stack>
 #include <stdexcept>
 #include <cctype>
+#include <iostream>
 
 // Constructor
 ArbolExpresion::ArbolExpresion() : raiz(nullptr) {}
@@ -107,3 +108,78 @@ double ArbolExpresion::evaluar()
 }
 
 // RECORRIDOS
+// Izq | Raiz | Derecha
+void ArbolExpresion::inorden(Nodo *nodo)
+{
+    if (nodo)
+    {
+        inorden(nodo->izquierda);
+        if (nodo->tipo == OPERANDO)
+        {
+            std::cout << nodo->valor_numerico << " ";
+        }
+        else
+        {
+            std::cout << nodo->valor_operador << " ";
+        }
+        inorden(nodo->derecha);
+    }
+    // SINO es NULLPTR
+}
+
+// Raiz | Izq | Derecha
+void ArbolExpresion::preorden(Nodo *nodo)
+{
+    if (nodo)
+    {
+        if (nodo->tipo == OPERANDO)
+        {
+            std::cout << nodo->valor_numerico << " ";
+        }
+        else
+        {
+            std::cout << nodo->valor_operador << " ";
+        }
+        preorden(nodo->izquierda);
+        preorden(nodo->derecha);
+    }
+    // SINO es NULLPTR
+}
+
+// Izq | Derecha | Raiz
+void ArbolExpresion::postorden(Nodo *nodo)
+{
+    if (nodo)
+    {
+        preorden(nodo->izquierda);
+        preorden(nodo->derecha);
+        if (nodo->tipo == OPERANDO)
+        {
+            std::cout << nodo->valor_numerico << " ";
+        }
+        else
+        {
+            std::cout << nodo->valor_operador << " ";
+        }
+    }
+    // SINO es NULLPTR
+}
+
+// Interfaz publica para recorridos
+void ArbolExpresion::recorrerInorden()
+{
+    inorden(raiz);
+    std::cout << std::endl;
+}
+
+void ArbolExpresion::recorrerPreorden()
+{
+    preorden(raiz);
+    std::cout << std::endl;
+}
+
+void ArbolExpresion::recorrerPostorden()
+{
+    postorden(raiz);
+    std::cout << std::endl;
+}
