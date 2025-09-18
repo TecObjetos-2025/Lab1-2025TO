@@ -36,7 +36,7 @@ std::vector<std::string> ProcesadorOperacion::tokenizar(const std::string &entra
     return tokens;
 }
 
-int obtenerPrecedencia(char op)
+int ProcesadorOperacion::obtenerPrecedencia(char op)
 {
     if (op == '+' || op == '-')
         return 1;
@@ -45,9 +45,9 @@ int obtenerPrecedencia(char op)
     return 0;
 }
 
-bool esOperador(const std::string &token)
+bool ProcesadorOperacion::esOperador(char token)
 {
-    return token.length() == 1 && (token[0] == '+' || token[0] == '-' || token[0] == '*' || token[0] == '/');
+    return token == '+' || token == '-' || token == '*' || token == '/';
 }
 
 std::vector<std::string> ProcesadorOperacion::convertirAPosfijo(const std::string &expresion)

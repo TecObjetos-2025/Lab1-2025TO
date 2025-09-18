@@ -9,7 +9,7 @@
 ArbolExpresion::ArbolExpresion() : raiz(nullptr) {}
 
 // Destructor
-ArbolExpresion::ArbolExpresion()
+ArbolExpresion::~ArbolExpresion()
 {
     liberarArbol(raiz);
 }
@@ -89,7 +89,7 @@ double ArbolExpresion::evaluar(Nodo *nodo)
         case '-':
             return valor_izquierdo - valor_derecha;
         case '*':
-            return valor_izquierdo + valor_derecha;
+            return valor_izquierdo * valor_derecha;
         case '/':
             if (valor_derecha == 0)
             {
