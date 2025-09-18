@@ -1,7 +1,7 @@
 #ifndef OPERACIONFACTORY_H
 #define OPERACIONFACTORY_H
 
-#include "Operacion.h"
+#include "../operaciones/Operacion.h"
 
 class OperacionFactory
 {

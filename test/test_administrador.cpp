@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../src/AdministradorOperaciones.h"
+#include "../src/core/AdministradorOperaciones.h"
 
 TEST(AdministradorOperacionesTest, SePuedeCalcularResta)
 {

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../src/Suma.h"
+#include "../src/operaciones/Suma.h"
 
 TEST(SumaTest, sumarDosNumerosPositivos)
 {

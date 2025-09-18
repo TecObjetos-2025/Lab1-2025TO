@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../src/ProcesadorOperacion.h"
+#include "../src/parsers/ProcesadorOperacion.h"
 #include <vector>
 
 TEST(ProcesadorTest, SePuedeTokenizarEntradaDeDosNumeros)
@@ -8,7 +8,7 @@ TEST(ProcesadorTest, SePuedeTokenizarEntradaDeDosNumeros)
     std::string entrada = "12+34";
     std::vector<std::string> resultadoEsperado = {"12", "+", "34"};
 
-    std::vector<std::string> resultadoActual = procesador.procesar(entrada);
+    std::vector<std::string> resultadoActual = procesador.tokenizar(entrada);
 
     ASSERT_EQ(resultadoActual, resultadoEsperado);
 }
@@ -19,7 +19,7 @@ TEST(ProcesadorTest, SePuedeTokenizarEntradaDeMuchosNumeros)
     std::string entrada = "1+2+3+4+5+6";
     std::vector<std::string> resultadoEsperado = {"1", "+", "2", "+", "3", "+", "4", "+", "5", "+", "6"};
 
-    std::vector<std::string> resultadoActual = procesador.procesar(entrada);
+    std::vector<std::string> resultadoActual = procesador.tokenizar(entrada);
 
     ASSERT_EQ(resultadoActual, resultadoEsperado);
 }

@@ -15,7 +15,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # Fuentes del módulo core (componentes principales)
 set(CORE_SOURCES
-    src/core/main.cpp
     src/core/AdministradorOperaciones.cpp
 )
 
@@ -40,7 +39,7 @@ set(PARSERS_SOURCES
 # Fuentes del módulo core (componentes principales)
 set(ARBOL_SOURCES
     src/arbol/Nodo.cpp
-    src/arbol/Arbol.cpp
+    src/arbol/ArbolExpresion.cpp
 )
 
 # Combinar todas las fuentes
@@ -57,13 +56,14 @@ set(ALL_SOURCES
 # ==============================================================================
 
 # Aplicación principal
-add_executable(calculadora_app ${ALL_SOURCES})
+add_executable(calculadora_app ${ALL_SOURCES} src/core/main.cpp)
 
 # Ejecutable de pruebas (incluye todas las fuentes + archivos de test)
 add_executable(test_runner 
     test/test_suma.cpp 
     test/test_procesador.cpp 
     test/test_administrador.cpp 
+    test/test_arbol_expresion.cpp
     ${ALL_SOURCES})
 
 # ==============================================================================
