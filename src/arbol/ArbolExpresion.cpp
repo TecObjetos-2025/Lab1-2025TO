@@ -64,3 +64,46 @@ void ArbolExpresion::construirArbol(const std::vector<std::string> &tokens)
     }
     raiz = pila.top();
 }
+
+double ArbolExpresion::evaluar(Nodo *nodo)
+{
+    if (!nodo)
+    {
+        throw std::invalid_argument("Ops! El arbol de expresion esta vacio");
+    }
+
+    if (nodo->tipo == OPERANDO)
+    {
+        return nodo->valor_numerico;
+    }
+
+    double valor_izquierdo = evaluar(nodo->izquierda);
+    double valor_derecha = evaluar(nodo->derecha);
+
+    switch (nodo->valor_operador)
+    {
+        {
+        case '+':
+            return valor_izquierdo + valor_derecha;
+        case '-':
+            return valor_izquierdo - valor_derecha;
+        case '*':
+            return valor_izquierdo + valor_derecha;
+        case '/':
+            if (valor_derecha == 0)
+            {
+                throw std::runtime_error("Error: Division por cero");
+            }
+            return valor_izquierdo / valor_derecha;
+        default:
+            throw std::invalid_argument("Error: El Operador no es valido");
+        }
+    }
+}
+
+double ArbolExpresion::evaluar()
+{
+    return evaluar(raiz);
+}
+
+// RECORRIDOS
