@@ -36,10 +36,15 @@ set(PARSERS_SOURCES
     src/parsers/ProcesadorOperacion.cpp
 )
 
-# Fuentes del módulo core (componentes principales)
+# Fuentes del módulo arbol (construccion del arbol de expresion)
 set(ARBOL_SOURCES
     src/arbol/Nodo.cpp
     src/arbol/ArbolExpresion.cpp
+)
+
+# Fuentes del módulo utilidades (utilidades comunes en el proyecto)
+set(UTILIDADES_SOURCES
+    src/utilidades/Utilidades.cpp
 )
 
 # Combinar todas las fuentes
@@ -49,6 +54,7 @@ set(ALL_SOURCES
     ${FACTORIES_SOURCES}
     ${PARSERS_SOURCES}
     ${ARBOL_SOURCES}
+    ${UTILIDADES_SOURCES}
 )
 
 # ==============================================================================

@@ -1,4 +1,5 @@
 #include "ArbolExpresion.h"
+#include "../utilidades/Utilidades.h"
 #include "Nodo.h"
 #include <stack>
 #include <stdexcept>
@@ -25,12 +26,6 @@ void ArbolExpresion::liberarArbol(Nodo *nodo)
     }
 }
 
-// Funciones auxiliares
-bool esOperador(const std::string &token)
-{
-    return token.length() == 1 && (token[0] == '+' || token[0] == '-' || token[0] == '*' || token[0] == '/');
-}
-
 // Construir el arbol
 // Inspirado en https://stackoverflow.com/questions/19895308/converting-from-reverse-polish-notationrpn-into-a-tree-form
 void ArbolExpresion::construirArbol(const std::vector<std::string> &tokens)
@@ -39,7 +34,7 @@ void ArbolExpresion::construirArbol(const std::vector<std::string> &tokens)
 
     for (const auto &token : tokens)
     {
-        if (!esOperador(token))
+        if (!Utilidades::esOperador(token[0]))
         {
             pila.push(new Nodo(std::stod(token)));
         }

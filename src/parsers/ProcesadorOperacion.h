@@ -8,13 +8,10 @@
 class ProcesadorOperacion
 {
 private:
+public:
     /*
      * Tomar una cadena y devolver un vector de strings
      */
-    int obtenerPrecedencia(char op);
-    bool esOperador(char op);
-
-public:
     std::vector<std::string> tokenizar(const std::string &entrada);
     std::vector<std::string> convertirAPosfijo(const std::string &expresion);
 };

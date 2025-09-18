@@ -1,4 +1,5 @@
 #include "ProcesadorOperacion.h"
+#include "../utilidades/Utilidades.h"
 
 std::vector<std::string> ProcesadorOperacion::tokenizar(const std::string &entrada)
 {
@@ -36,20 +37,6 @@ std::vector<std::string> ProcesadorOperacion::tokenizar(const std::string &entra
     return tokens;
 }
 
-int ProcesadorOperacion::obtenerPrecedencia(char op)
-{
-    if (op == '+' || op == '-')
-        return 1;
-    if (op == '*' || op == '/')
-        return 2;
-    return 0;
-}
-
-bool ProcesadorOperacion::esOperador(char token)
-{
-    return token == '+' || token == '-' || token == '*' || token == '/';
-}
-
 std::vector<std::string> ProcesadorOperacion::convertirAPosfijo(const std::string &expresion)
 {
     std::vector<std::string> tokens_infijos = tokenizar(expresion);
@@ -59,14 +46,14 @@ std::vector<std::string> ProcesadorOperacion::convertirAPosfijo(const std::strin
 
     for (const auto &token : tokens_infijos)
     {
-        if (!esOperador(token[0]))
+        if (!Utilidades::esOperador(token[0]))
         {
             tokens_posfijos.push_back(token);
         }
         else
         {
             char op_actual = token[0];
-            while (!operadores.empty() && obtenerPrecedencia(operadores.top()) >= obtenerPrecedencia(op_actual))
+            while (!operadores.empty() && Utilidades::obtenerPrecedencia(operadores.top()) >= Utilidades::obtenerPrecedencia(op_actual))
             {
                 tokens_posfijos.push_back(std::string(1, operadores.top()));
                 operadores.pop();
