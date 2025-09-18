@@ -40,6 +40,7 @@ set(PARSERS_SOURCES
 # Fuentes del módulo core (componentes principales)
 set(ARBOL_SOURCES
     src/arbol/Nodo.cpp
+    src/arbol/Arbol.cpp
 )
 
 # Combinar todas las fuentes
