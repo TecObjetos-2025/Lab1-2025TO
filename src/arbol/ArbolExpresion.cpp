@@ -1,4 +1,5 @@
 #include "ArbolExpresion.h"
+#include "../factories/OperacionFactory.h"
 #include "../utilidades/Utilidades.h"
 #include "Nodo.h"
 #include <stack>
@@ -15,7 +16,7 @@ ArbolExpresion::~ArbolExpresion()
     liberarArbol(raiz);
 }
 
-// Destruir cada nodo del arbol (memory free)
+// Destruir cada nodo del arbol (memory free) de manera recursiva
 void ArbolExpresion::liberarArbol(Nodo *nodo)
 {
     if (nodo)
@@ -44,7 +45,10 @@ void ArbolExpresion::construirArbol(const std::vector<std::string> &tokens)
             {
                 throw std::invalid_argument("Expresion no esta bien formada");
             }
+            // Usando el nodo en el heap
             Nodo *nodo_operador = new Nodo(token[0]);
+
+            // Los hijos igual creados anteriormente
             nodo_operador->derecha = pila.top();
             pila.pop();
             nodo_operador->izquierda = pila.top();
@@ -76,25 +80,12 @@ double ArbolExpresion::evaluar(Nodo *nodo)
     double valor_izquierdo = evaluar(nodo->izquierda);
     double valor_derecha = evaluar(nodo->derecha);
 
-    switch (nodo->valor_operador)
-    {
-        {
-        case '+':
-            return valor_izquierdo + valor_derecha;
-        case '-':
-            return valor_izquierdo - valor_derecha;
-        case '*':
-            return valor_izquierdo * valor_derecha;
-        case '/':
-            if (valor_derecha == 0)
-            {
-                throw std::runtime_error("Error: Division por cero");
-            }
-            return valor_izquierdo / valor_derecha;
-        default:
-            throw std::invalid_argument("Error: El Operador no es valido");
-        }
-    }
+    Operacion *operacion = OperacionFactory::crearOperacion(nodo->valor_operador);
+    double resultado = operacion->ejecutar(valor_izquierdo, valor_derecha);
+
+    delete operacion;
+
+    return resultado;
 }
 
 double ArbolExpresion::evaluar()
